@@ -1,13 +1,21 @@
 1.If 7TB is the available disk space per node (9 disks with 1 TB, 2 disk for operating system etc. were excluded.). Assuming initial data size is 600 TB. How will you estimate the number of data nodes (n)?
 Ans: 
+h=crs/(1-i)
+where: 
+c = average compression ratio. It depends on the type of compression used and size of the data. When no compression is used, c=1. 
+r = replication factor. It,s default value is 3
+S = size of data to be moved to Hadoop. =600TB 
+i = intermediate factor. It is usually 1/4.
+h=1*3*600*(1-1/4)
+h=2400
 N= h/d
 Where h = hadoop storage required =600TB
 d= storage available each node = 7TB
 N = number of data nodes
-N= 600/7
-N=85.71
-N ~ 86
-Therefore,  the number of datanode required are 86.
+N= 2400/7
+N=342.87
+N ~ 343
+Therefore,  the number of datanode required are 343.
 
 2. .Imagine that you are uploading a file of 500MB into HDFS.100MB of data is successfully uploaded into HDFS and another client wants to read the uploaded data while the upload is still in progress. What will happen in such a scenario, will the 100 MB of data that is uploaded will it be displayed?
 Default block size is  of 64 MB for Hadoop 1x and 128 MB for Hadoop 2x whereas, for the above scenario let us consider block size of 100 MB which means that we are going to have 5 blocks without replication. Let’s consider an example of how does a block is written to HDFS:
